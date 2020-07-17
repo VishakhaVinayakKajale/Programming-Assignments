@@ -1,0 +1,565 @@
+<html>
+
+<body>
+<h2> String Operations
+</h2> 
+
+<br>
+<h3>
+1. Find the last but one box of a list.<br>
+2. Find the last box of a list.<br>
+3. Find the K'th element of a list.<br>
+4. Find wether string is palindrome or not.<br>
+5. Find the number of elements of a list.<br>
+6. Reverse a list.<br>
+7. Eliminate consecutive duplicates of list elements.<br>
+8. Pack consecutive duplicates of list elements into sublists.<br>
+9. Run-length encoding of a list.<br>
+10. Modify the result of problem-9 in such a way that if an element has no duplicates it is simply copied into the result list. Only elements with duplicates are transferred as (N E) lists.<br>
+11. Duplicate the elements of a list.<br>
+12. Replicate the elements of a list a given number of times.<br>
+13. Remove the K'th element from a list.<br>
+14. Split a list into two parts; the length of the first part is given.<br>
+15. Extract a slice from a list.<br>
+16. Rotate a list N places to the left.<br>
+17. Drop every N'th element from a list.<br>
+18. Insert an element at a given position into a list.<br>
+19. Flatten a nested list structure.<br>
+20. Create a list containing all integers within a given range.<br>
+21. Sorting a list of lists according to length of sublists.<br>
+</h3>
+
+<script>
+
+var final;
+
+function validPos(inpt,pos)
+{
+	if(pos>inpt.length)
+	{
+		document.write("Invalid Position!");
+		return;
+	}
+	else
+		return 1;
+
+}
+
+function getLastTwo(inpt)
+{
+
+	var len=inpt.length;
+	var ch=inpt.slice(len-2,len);
+	document.write(ch);
+
+
+}
+
+function getLast(inpt)
+{
+	var len=inpt.length;
+	var ch=inpt.charAt(len-1);
+	document.write(ch);
+	
+}
+
+function getPosLetter(inpt,pos)
+{
+	var len=inpt.length;
+	if(pos<=len)
+	{
+		var ans=inpt.charAt(pos-1);
+		document.write(ans);
+		   
+	}
+	else
+	{
+		document.write("Invalid number!");
+		return; 
+	}
+	
+}
+
+function stringPallindrome(inpt)
+{
+	
+	var len1=inpt.length;
+		var i=0;
+		var j=len1-1;
+		while(i<len1 && j>=0)
+		{
+		    var t1,t2;
+		    t1=inpt.charAt(i);
+		    t2=inpt.charAt(j);
+		    
+		    if(t1==t2)
+		    {
+		        i++;
+		        j--;
+		    }
+		    else
+		    {
+		        document.write("not pallindrome");
+		        return;
+		    }
+		    
+		}
+		document.write("pallindrome");
+}
+
+function getCount(inpt)
+{
+	var len=inpt.length;
+	document.write(len);
+	
+}
+
+function reverseString(inpt)
+{
+	var len=inpt.length;
+	var temp=len;
+	while(temp>=0)
+	{
+		document.write(inpt.charAt(temp-1));
+		temp--;
+	}
+}
+
+function removeDuplicates(inpt)
+{
+	 final=inpt.charAt(0);
+	var len,len1,i,j,temp;
+
+	len=inpt.length;
+	len1=final.length;
+
+	for(i=1;i<=len;i++)
+	{	
+		var flag=0;
+		temp=inpt.charAt(i);
+		for(j=0;j<len1;j++)
+		{
+			if(temp==final.charAt(j))
+			{
+				flag=1;
+			}
+		}
+		if(flag!=1)
+		{
+			final=final.concat(temp);
+			len1=final.length;
+		}
+	}
+	document.write(final);
+}
+
+function consecutiveDuplicates(inpt)
+{
+	 final="( ";
+	for(var i=0;i<inpt.length;i++)
+	{
+		var temp=inpt.charAt(i);
+		if(temp==inpt.charAt(i+1))
+		{
+			final=final.concat(temp);
+		}
+		else 
+		{
+			final=final.concat(temp);
+			final=final.concat(" ) (");
+		}
+	}
+	var len1=final.length;
+	document.write(final.slice(0,len1-1));
+}
+
+function consecutiveDuplicatesWithCount(inpt)
+{
+	 final="(";
+	var count=1;
+	for(var i=0;i<inpt.length;i++)
+	{
+		var temp=inpt.charAt(i);
+		if(temp==inpt.charAt(i+1))
+		{
+			count++;
+		}
+		else 
+		{
+			final=final.concat(count);
+			final=final.concat(" "+temp);
+			final=final.concat(" ) (");
+			count=1;
+		}
+	}
+	var len1=final.length;
+	document.write(final.slice(0,len1-1));
+}
+
+function modifyDuplicate(inpt)
+{
+	 final="( ";
+	var count=1;
+	for(var i=0;i<inpt.length;i++)
+	{
+		var temp=inpt.charAt(i);
+		if(temp==inpt.charAt(i+1))
+		{
+			count++;
+		}
+		else if(count>1)
+		{
+			final=final.concat(count);
+			final=final.concat(" "+temp);
+			final=final.concat(" ) (");
+			count=1;
+		}
+		else
+		{
+			final=final.concat(temp);
+			final=final.concat(") (");
+		}
+
+	}
+	var len1=final.length;
+	document.write(final.slice(0,len1-1));
+
+}
+
+function duplicateString(inpt)
+{
+	 final=" ";
+	var len=inpt.length;
+	var i;
+	for(i=0;i<len;i++)
+	{
+		var temp=inpt.charAt(i);
+		final=final.concat(inpt.charAt(i));
+		final=final.concat(temp);
+	}
+	document.write(final);
+}
+function duplicateStringWithCount(inpt,count)
+{
+	 final=" ";
+	var len=inpt.length;
+	var i,j;
+	for(i=0;i<len;i++)
+	{
+		j=0;
+		while(j<=count)
+		{
+			final=final.concat(inpt.charAt(i));
+			j++;
+		}
+		
+	}
+	document.write(final);
+}
+
+function removeElement(inpt,pos)
+{
+
+	
+	var len=inpt.length;
+	 final=inpt.slice(0,pos-1);
+	var temp=inpt.slice(pos,len);
+	final=final.concat(temp);
+	return final;
+	
+}
+
+function splitString(inpt,len1)
+{
+	var len=inpt.length;
+	if (len1>=len)
+	{
+		document.write("Invalid position");
+		return;
+	}
+	var str1="";
+	var str2="";
+	str1=inpt.slice(0,len1-1);
+	str2=inpt.slice(len1-1,len);
+
+	document.write(str1+" & "+str2);	
+	
+}
+
+function validSlice(inpt,pos1,pos2)
+{
+	if(pos1>=inpt.length || pos2>inpt.length)
+	{
+		document.write("Invalid positions!");
+		return;
+	}
+	else
+		return 1;
+}
+function sliceString(inpt,pos1,pos2)
+{
+	
+	final=inpt.slice(pos1-1,pos2);
+	return final;
+	
+}
+
+function rotateElement(inpt,pos)
+{
+	var len=inpt.length;
+	final=sliceString(inpt,pos,len);
+	var temp=sliceString(inpt,1,pos-1);
+	
+	final=final.concat(temp);
+	
+	return final;
+	
+}
+function dropElement(inpt,pos)
+{
+	var len=inpt.length;
+	final="";
+	for(var i=0;i<len;i++)
+	{
+		if((i+1)/pos!=0)
+		{
+			temp=inpt.charAt(i+1);
+			final=final.concat(temp);
+		}
+	}
+	return final;
+}
+
+function insertString(inpt,pos,word)
+{
+	var len=inpt.length;
+	var temp1=inpt.slice(0,pos-1);
+	var temp2=inpt.slice(pos-1,len);
+	final=temp1.concat(word);
+	final=final.concat(temp2);
+	return final;
+	
+}
+
+function createRange(pos1,pos2)	
+{
+	var i=pos1;
+	var arr1=[];
+	while(i<=pos2)
+	{
+		arr1.push(i);
+		i++;
+	}
+	return arr1;
+}
+
+function sort(arrCount,arrElement)
+{
+	var temp1;
+	
+	for(var i=0;i<arrCount.length;i++) 
+	{
+	   for(var j=i+1;j<arrCount.length;j++)
+	   {
+	      if(arrCount[j] < arrCount[i]) 
+		{
+		 temp1 = arrCount[i];
+		 arrCount[i] = arrCount[j];
+		 arrCount[j] = temp1;
+		}
+	      }
+	}
+	for(var j=0;j<arrCount.length;j++)
+	{
+		document.write(arrCount[j]+"-"+arrElement[j]+"  ");
+	}
+}
+
+function sortSublist(inpt)
+{
+	final="";
+	var count,j;
+	var arrCount=[];
+	var arrElement=[];
+	count=1;
+	j=0;
+	for(var i=0;i<inpt.length;i++)
+	{
+		var temp=inpt.charAt(i);
+		if(temp==inpt.charAt(i+1))
+		{
+			count++;
+		}
+		
+		arrCount[j]=count;
+		arrElement[j]=temp;
+		if(temp!=inpt.charAt(i+1))
+		{
+			j++;
+			count=1;
+		}
+		
+		
+	}
+	
+	sort(arrCount,arrElement);
+	
+}
+	
+		
+
+function stringOperation()
+{
+	var id=Number(prompt("Enter the operation id"));
+	var inpt=String(prompt("Enter your name:","....."));
+	
+	switch(id)
+	{
+		case 1: document.write("<br /><br />");
+			document.write(id+" -> Last two letters of string "+inpt+"  is: ")
+			getLastTwo(inpt);
+		break;
+
+		case 2: document.write("<br /><br />");
+			document.write(id+" -> Last letter of string "+inpt+"  is: ")
+			getLast(inpt);
+		break;
+
+		case 3: document.write("<br /><br />");
+			var pos=Number(prompt("Enter the position number: "));
+			document.write(id+" -> Letter at position "+pos+" is: ");
+			getPosLetter(inpt,pos);
+		break;
+
+		case 4: document.write("<br /><br />");
+			document.write(id+" ->"+"<h3>"+inpt+"</h3>"+" is ");
+			stringPallindrome(inpt);
+		break;
+
+		case 5: document.write("<br /><br />");
+			document.write(id+" -> Legnth of string "+inpt+" is: ");
+			getCount(inpt);
+		break;
+
+		case 6: document.write("<br /><br />");
+			document.write(id+" -> Reverse of string "+inpt+" is: ");
+			reverseString(inpt);
+		break;
+
+		case 7: document.write("<br /><br />");
+			document.write(id+" -> Original string is "+inpt+"<br /> String after removal of duplicates: ");
+			removeDuplicates(inpt);
+		break;
+
+		case 8: document.write("<br /><br />");
+			document.write(id+" -> Original string is "+inpt+"<br /> Sub-String of consecutive duplicates: ");
+			consecutiveDuplicates(inpt);
+		break;
+
+		case 9: document.write("<br /><br />");
+			document.write(id+" -> Original string is "+inpt+"<br /> count of consecutive duplicates: ");
+			consecutiveDuplicatesWithCount(inpt);
+		break;
+
+		case 10: document.write("<br /><br />");
+			document.write(id+" -> Original string is "+inpt+"<br /> count of consecutive duplicates: ");
+			modifyDuplicate(inpt);
+		break;
+
+		case 11: document.write("<br /><br />");
+			document.write(id+" -> Original string is "+inpt+"<br /> String with duplicate element: ");
+			duplicateString(inpt);
+		break;
+
+		case 12: document.write("<br /><br />");
+			var count=Number(prompt("how many times do you want to duplicate the elements? "));
+			document.write(id+" -> Original string is "+inpt+"<br /> User want to duplicate every element for "+count+" times"+"<br /> String with duplicate element: ");
+			duplicateStringWithCount(inpt,count);
+		break;
+
+		case 13: document.write("<br /><br />");
+			var pos=Number(prompt("Enter the position of element: "));
+			if(pos>inpt.length)
+			{
+				document.write("Invalid position!");
+				break;
+			}
+			document.write(id+" -> Original string is "+inpt+"<br /> User want to remove element present at "+pos+" position in string"+"<br /> String after removal of element: "+removeElement(inpt,pos));
+			
+		break;
+
+		case 14: document.write("<br /><br />");
+			var len1=Number(prompt("Enter the position from where you want to split the string: "));
+			document.write(id+" -> Original string is "+inpt+"<br /> User want to split string from "+len1+" position"+"<br /> Splitted strings are: ");
+			splitString(inpt,len1);
+		break;
+
+		case 15: document.write("<br /><br />");
+			var pos1=Number(prompt("Enter first position from where you want to slice the string: "));
+			var pos2=Number(prompt("Enter second position from where you want to slice the string: "));
+			if(validSlice(inpt,pos1,pos2)==1)
+			{
+				document.write(id+" -> Original string is "+inpt+"<br /> User want to slice string from "+pos1+" to "+pos2+"<br /> Sliced string: "+sliceString(inpt,pos1,pos2));
+			}
+			
+		break;
+
+		case 16: document.write("<br /><br />");
+			var pos=Number(prompt("Enter the position from where you want to rotate the string: "));
+			if(validPos(inpt,pos)==1)
+				document.write(id+" -> Original string is "+inpt+"<br /> User want to rotate string from "+pos+" position"+"<br /> String after rotation of elements: "+rotateElement(inpt,pos));
+			
+		break;
+
+		case 17: document.write("<br /><br />");
+			var pos=Number(prompt("Enter the dropping position : "));
+			if(validPos(inpt,pos)==1)
+				document.write(id+" -> Original string is "+inpt+"<br /> User want to drop every "+pos+" position element from string"+"<br /> String after rotaion:"+dropElement(inpt,pos));
+			
+		break;
+
+		case 18: document.write("<br /><br />");
+			var pos=Number(prompt("Enter the  position where you want to insert the word: "));
+			if(validPos(inpt,pos)==1)
+			{
+				var word=String(prompt("Enter the word: "));
+				document.write(id+" -> Original string is "+inpt+"<br /> User want to drop word "+word+" at position "+pos+"<br /> Updated string :"+insertString(inpt,pos,word));
+			}
+			break;
+	
+		case 20: document.write("<br /><br />");
+			var pos1=Number(prompt("Enter the strarting integer of range "));
+			var pos2=Number(prompt("Enter last one: "));
+			document.write(id+" -> User name: "+inpt+"<br />Range starting from "+pos1+" to "+pos2+"<br /> => "+createRange(pos1,pos2));
+			
+			
+		break;
+
+		case 21: document.write("<br /><br />");
+			
+			document.write(id+" -> Original string "+inpt+" <br /> Sorted => ");
+			sortSublist(inpt);
+			break;
+
+
+		default : document.write("<h3> Invalid id </h3>");
+	}
+
+	var flag1=Boolean(confirm("Do you want to continue","then ?"));
+	if(flag1==true)
+	{
+		stringOperation();
+	}
+	else
+	{
+		return;
+	}
+
+
+}
+
+stringOperation();		
+  
+</script>
+</body>    
+</html>
